@@ -1,12 +1,12 @@
 <template>
-  <header class="max-w-6xl mx-auto container p-4 md:p-8 flex justify-between items-center">
+  <header class="p-4 md:p-8 flex justify-between items-center">
     <router-link :to="{ name: 'home' }">
       <h1 class="sr-only">{{ siteMeataData.title }}</h1>
       <img class="w-10 h-10" src="@/assets/logo.svg" alt="logo" />
     </router-link>
     <div class="hidden sm:block">
       <nav class="uppercase font-medium">
-        <ul class="flex justify-between gap-2">
+        <ul class="flex justify-between gap-8">
           <li>
             <router-link exact-active-class="font-bold text-accent" :to="{ name: 'people' }"
               >People</router-link
@@ -31,7 +31,7 @@
       </nav>
     </div>
     <!-- mobile nav -->
-    <div class="sm:hidden">
+    <div class="sm:hidden z-50">
       <button
         v-if="!isMenuOpen"
         type="button"
@@ -42,7 +42,6 @@
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          class="text-gray-900 dark:text-gray-100"
         >
           <path
             fill-rule="evenodd"
@@ -52,7 +51,7 @@
         </svg>
       </button>
       <div
-        class="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-neutral/75 duration-300 ease-in-out"
+        class="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-neutral/90 duration-300 ease-in-out"
         :class="isMenuOpen ? 'translate-x-0' : 'translate-x-full'"
       >
         <div class="absolute top-0 right-0">
