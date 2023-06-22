@@ -4,7 +4,7 @@
       <h1 class="sr-only">{{ siteMeataData.title }}</h1>
       <img class="w-10 h-10" src="@/assets/logo.svg" alt="logo" />
     </router-link>
-    <div class="hidden md:block">
+    <div class="hidden sm:block">
       <nav class="uppercase font-medium">
         <ul class="flex justify-between gap-2">
           <li>
