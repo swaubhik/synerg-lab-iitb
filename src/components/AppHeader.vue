@@ -13,13 +13,8 @@
             >
           </li>
           <li>
-            <router-link exact-active-class="font-bold text-accent" :to="{ name: 'projects' }"
-              >Projects</router-link
-            >
-          </li>
-          <li>
-            <router-link exact-active-class="font-bold text-accent" :to="{ name: 'publications' }"
-              >Publications</router-link
+            <router-link exact-active-class="font-bold text-accent" :to="{ name: 'research' }"
+              >Research</router-link
             >
           </li>
           <li>
@@ -38,11 +33,7 @@
         class="ml-1 mr-1 h-8 w-8 rounded py-1"
         @click="toggleMenu"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path
             fill-rule="evenodd"
             d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
@@ -91,17 +82,9 @@
             <li>
               <router-link
                 exact-active-class="font-bold text-accent"
-                :to="{ name: 'projects' }"
+                :to="{ name: 'research' }"
                 @click="toggleMenu"
-                >Projects</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                exact-active-class="font-bold text-accent"
-                :to="{ name: 'publications' }"
-                @click="toggleMenu"
-                >Publications</router-link
+                >Research</router-link
               >
             </li>
             <li>
