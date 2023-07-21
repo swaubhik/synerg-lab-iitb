@@ -9,7 +9,7 @@
       @close="closeModal"
     />
     <div
-      class="bg-no-repeat bg-center h-64 rounded-lg w-full bg-[url('@/assets/images/home-bg.png')"
+      class="bg-no-repeat bg-center h-64 rounded-lg w-full bg-[url('@/assets/images/home-bg.png')]"
     >
       <div
         class="flex flex-col items-center justify-center h-full bg-gradient-to-b from-primary/80 via-neutral/20 to-transparent px-2"
