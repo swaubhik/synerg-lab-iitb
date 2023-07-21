@@ -4,7 +4,6 @@ export default {
   url: 'https://synerg.cse.iitb.ac.in',
   image: 'https://mysite.com/images/og-image.jpg',
 
-  homePageBackgroundImage: '/src/assets/images/home-bg.png',
   socials: {
     twitter: 'https://twitter.com/username',
     facebook: 'https://facebook.com/username',
