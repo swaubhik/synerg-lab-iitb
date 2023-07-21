@@ -1,18 +1,25 @@
 <template>
   <section class="flex flex-col gap-10">
-    <div class="bg-no-repeat bg-center h-64 rounded-lg w-full bg-red-700">
+    <div
+      class="bg-no-repeat bg-center bg-cover h-64 rounded-lg w-full bg-[url('@/assets/images/people-bg.jpg')]"
+    >
       <div
-        class="flex flex-col items-center justify-center h-full bg-gradient-to-b from-primary via-neutral/20 to-transparent"
+        class="flex flex-col items-center justify-center h-full bg-gradient-to-b from-primary/80 via-neutral/20 to-transparent"
       >
         <h1 class="text-4xl font-semibold">People</h1>
       </div>
     </div>
     <div class="flex flex-col text-accent justify-center items-center">
       <h2 class="text-3xl font-bold">Faculty</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-10 place-content-center">
-        <div class="" v-for="faculty in faculties" :key="faculty.id">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-10 place-items-center">
+        <div class="col-span-1" v-if="faculties.length == 1"></div>
+        <div
+          class="flex justify-center items-center flex-col"
+          v-for="faculty in faculties"
+          :key="faculty.id"
+        >
           <img
-            class="w-96 h-96 object-cover rounded-lg"
+            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-lg"
             :src="faculty.profile_pic"
             :alt="faculty.name + '&nbsp;Photo'"
           />
@@ -55,11 +62,41 @@
       </div>
     </div>
     <div class="flex flex-col text-accent justify-center items-center">
-      <h2 class="text-3xl font-bold">Students</h2>
+      <h2 class="text-3xl font-bold mb-3">Students</h2>
+      <div class="flex border-accent border">
+        <button
+          @click=";(this.selectedStudents = PHDstudents), (selectedTab = 'phd')"
+          class="px-4 py-2 text-accent font-semibold"
+          :class="{ 'bg-accent text-white font-bold': selectedTab === 'phd' }"
+        >
+          PHD
+        </button>
+        <button
+          @click=";(this.selectedStudents = MSstudents), (selectedTab = 'ms')"
+          class="px-4 py-2 text-accent font-semibold"
+          :class="{ 'bg-accent text-white font-bold': selectedTab === 'ms' }"
+        >
+          MS
+        </button>
+        <button
+          @click=";(this.selectedStudents = MTechstudents), (selectedTab = 'mtech')"
+          class="px-4 py-2 text-accent font-semibold"
+          :class="{ 'bg-accent text-white font-bold': selectedTab === 'mtech' }"
+        >
+          M. Tech
+        </button>
+        <button
+          @click=";(this.selectedStudents = BTechstudents), (selectedTab = 'btech')"
+          class="px-4 py-2 text-accent font-semibold"
+          :class="{ 'bg-accent text-white font-bold': selectedTab === 'btech' }"
+        >
+          B. Tech
+        </button>
+      </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-10">
-        <div class="" v-for="student in students" :key="student.id">
+        <div class="" v-for="student in selectedStudents" :key="student.id">
           <img
-            class="w-96 h-96 object-cover rounded-lg"
+            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-lg"
             :src="student.profile_pic"
             :alt="student.name + '&nbsp;Photo'"
           />
@@ -110,7 +147,9 @@ export default {
   data() {
     return {
       faculties: [],
-      students: []
+      students: [],
+      selectedTab: 'phd',
+      selectedStudents: []
     }
   },
   async created() {
@@ -139,7 +178,22 @@ export default {
               student.profile_pic
           )
         })
+        this.selectedStudents = this.PHDstudents
       })
+  },
+  computed: {
+    PHDstudents() {
+      return this.students.filter((student) => student.student_type === 'phd')
+    },
+    MSstudents() {
+      return this.students.filter((student) => student.student_type === 'ms')
+    },
+    MTechstudents() {
+      return this.students.filter((student) => student.student_type === 'mtech')
+    },
+    BTechstudents() {
+      return this.students.filter((student) => student.student_type === 'btech')
+    }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col px-10 gap-10">
+  <section class="flex flex-col px-10 gap-10 relative">
     <app-modal
       v-if="showModal"
       :isOpen="showModal"
@@ -13,7 +13,7 @@
       :style="{ backgroundImage: `url(${siteMetaData.homePageBackgroundImage})` }"
     >
       <div
-        class="flex flex-col items-center justify-center h-full bg-gradient-to-b from-primary via-neutral/20 to-transparent px-2"
+        class="flex flex-col items-center justify-center h-full bg-gradient-to-b from-primary/80 via-neutral/20 to-transparent px-2"
       >
         <h1 class="text-4xl font-semibold">{{ siteMetaData.title }}</h1>
         <h2 class="text-2xl">{{ siteMetaData.description }}</h2>
@@ -21,9 +21,9 @@
     </div>
     <div class="flex flex-col md:flex-row-reverse gap-10 w-full">
       <div
-        class="border border-accent h-96 rounded-lg flex flex-col md:w-1/4 items-center overflow-y-auto"
+        class="border  border-accent h-96 rounded-lg flex flex-col md:w-1/4 items-center overflow-y-auto"
       >
-        <div class="sticky top-0 bg-primary/90 flex py-4 w-full items-center justify-center">
+        <div class="sticky top-0 z-10 bg-primary/90 flex py-4 w-full items-center justify-center">
           <h3 class="text-2xl text-accent">News</h3>
         </div>
         <div class="flex w-full py-2">
