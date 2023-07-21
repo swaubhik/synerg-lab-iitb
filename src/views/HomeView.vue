@@ -21,7 +21,7 @@
     </div>
     <div class="flex flex-col md:flex-row-reverse gap-10 w-full">
       <div
-        class="border  border-accent h-96 rounded-lg flex flex-col md:w-1/4 items-center overflow-y-auto"
+        class="border border-accent h-96 rounded-lg flex flex-col md:w-1/4 items-center overflow-y-auto"
       >
         <div class="sticky top-0 z-10 bg-primary/90 flex py-4 w-full items-center justify-center">
           <h3 class="text-2xl text-accent">News</h3>
