@@ -1,7 +1,7 @@
 <template>
   <footer class="relative bottom-0 px-10 py-2 flex justify-between flex-col">
     <hr class="text-secondary w-full my-4" />
-    <div class="flex flex-col md:flex-row items-center justify-between">
+    <div class="flex gap-8 flex-col md:flex-row items-center justify-between">
       <ul class="flex justify-between gap-10">
         <li>
           <a :href="siteMetaData.socials.linkedin" target="_blank" rel="noopener noreferrer">
