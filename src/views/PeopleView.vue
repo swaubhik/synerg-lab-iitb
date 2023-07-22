@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col gap-10">
+  <section class="flex flex-col gap-10 px-10">
     <div
       class="bg-no-repeat bg-center bg-cover h-64 rounded-lg w-full bg-[url('@/assets/images/people-bg.jpg')]"
     >
