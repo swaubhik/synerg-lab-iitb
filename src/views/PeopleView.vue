@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col gap-10">
+  <section class="flex flex-col gap-10 px-10">
     <div
       class="bg-no-repeat bg-center bg-cover h-64 rounded-lg w-full bg-[url('@/assets/images/people-bg.jpg')]"
     >
@@ -11,8 +11,9 @@
     </div>
     <div class="flex flex-col text-accent justify-center items-center">
       <h2 class="text-3xl font-bold">Faculty</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-10 place-items-center">
-        <div class="col-span-1" v-if="faculties.length == 1"></div>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 place-items-center"
+      >
         <div
           class="flex justify-center items-center flex-col"
           v-for="faculty in faculties"
@@ -96,7 +97,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-10">
         <div class="" v-for="student in selectedStudents" :key="student.id">
           <img
-            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-lg"
+            class="w-64 h-64 md:w-80 md:h-80 object-cover object-center rounded-lg"
             :src="student.profile_pic"
             :alt="student.name + '&nbsp;Photo'"
           />

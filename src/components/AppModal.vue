@@ -3,7 +3,7 @@
     v-if="isOpen"
     class="fixed top-0 left-0 z-50 bg-secondary/75 w-screen h-screen flex justify-center items-center"
   >
-    <div class="bg-accent relative flex flex-col w-1/2 h-3/4 rounded-xl shadow-2xl text-primary">
+    <div class="bg-accent relative flex flex-col sm:w-1/2 mx-6 sm:h-3/4 rounded-xl shadow-2xl text-primary">
       <button
         @click="$emit('close')"
         class="absolute -top-3 -right-3 shadow-lg w-10 h-10 bg-secondary rounded-full flex justify-center items-center"
