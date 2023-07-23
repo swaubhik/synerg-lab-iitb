@@ -11,6 +11,9 @@ export default {
     instagram: 'https://instagram.com/username',
     github: 'https://github.com/username',
     email: 'mailto:email',
-    web: 'https://synerg.cse.iitb.ac.in'
+    web: 'https://synerg.cse.iitb.ac.in',
+    iitb: 'https://www.iitb.ac.in',
+    cseiitb: 'https://www.cse.iitb.ac.in',
+    adminlogin: 'http://synerg.centralindia.cloudapp.azure.com/_/',
   }
 }

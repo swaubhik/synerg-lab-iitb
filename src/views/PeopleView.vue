@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col gap-10">
+  <section class="flex flex-col gap-10 px-10">
     <div
       class="bg-no-repeat bg-center bg-cover h-64 rounded-lg w-full bg-[url('@/assets/images/people-bg.jpg')]"
     >
@@ -11,21 +11,22 @@
     </div>
     <div class="flex flex-col text-accent justify-center items-center">
       <h2 class="text-3xl font-bold">Faculty</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-10 place-items-center">
-        <div class="col-span-1" v-if="faculties.length == 1"></div>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 place-items-center"
+      >
         <div
           class="flex justify-center items-center flex-col"
           v-for="faculty in faculties"
           :key="faculty.id"
         >
           <img
-            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-lg"
+            class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-lg"
             :src="faculty.profile_pic"
             :alt="faculty.name + '&nbsp;Photo'"
           />
           <div class="flex flex-col items-center justify-center mt-3 text-white">
             <h3 class="text-2xl font-semibold mb-5">{{ faculty.name }}</h3>
-            <p class="text-sm font-medium">{{ faculty.research_area }}</p>
+            <p class="text-sm font-medium text-center">{{ faculty.research_area }}</p>
             <div class="flex gap-4 mt-6 text-accent">
               <a :href="`mailto:${faculty.email}`">
                 <svg
@@ -93,10 +94,10 @@
           B. Tech
         </button>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 place-items-center">
         <div class="" v-for="student in selectedStudents" :key="student.id">
           <img
-            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-lg"
+            class="w-64 h-64 md:w-80 md:h-80 object-cover object-center rounded-lg"
             :src="student.profile_pic"
             :alt="student.name + '&nbsp;Photo'"
           />
@@ -143,6 +144,8 @@
 
 <script>
 import axios from 'axios'
+import { mapImagePath } from '../helpers'
+
 export default {
   data() {
     return {
@@ -163,20 +166,10 @@ export default {
         this.faculties = response.data.items.filter((item) => item.user_type === 'faculty')
         this.students = response.data.items.filter((item) => item.user_type === 'student')
         this.faculties.forEach((faculty) => {
-          faculty.profile_pic = faculty.profile_pic.replace(
-            faculty.profile_pic,
-            import.meta.env.VITE_BACKEND_URL +
-              `api/files/users/${faculty.id}/` +
-              faculty.profile_pic
-          )
+          faculty.profile_pic =  mapImagePath(faculty.id , 'users' , faculty.profile_pic);
         })
         this.students.forEach((student) => {
-          student.profile_pic = student.profile_pic.replace(
-            student.profile_pic,
-            import.meta.env.VITE_BACKEND_URL +
-              `api/files/users/${student.id}/` +
-              student.profile_pic
-          )
+          student.profile_pic =  mapImagePath(student.id , 'users' , student.profile_pic);
         })
         this.selectedStudents = this.PHDstudents
       })
