@@ -9,37 +9,106 @@
     </div>
     <div class="flex flex-col items-center justify-center w-full h-fit mt-5">
       <div
-        class="vmb-5 md:text-left md:w-1/2 p-2"
+        class="vmb-5 md:text-left md:w-2/3 p-2"
         v-for="research_area in research_areas"
         :key="research_area.id"
       >
         <h2 v-html="research_area.topic" class="text-xl mb-2"></h2>
         <p v-html="research_area.details"></p>
       </div>
+      <div class="vmb-5 text-left w-full md:w-2/3 p-2">
+        <hr class="text-secondary w-full" />
+        <p class="text-xs p-2">Last Updated on 23 July, 2023</p>
+      </div>
     </div>
-    <hr class="text-secondary w-full" />
-    <p class="text-xs">Last Updated on 23 July, 2023</p>
 
-    <div class="mt-4">
-      <p class="text-xl mb-4">Principal Researchers</p>
-      <div class="flex flex-col items-center justify-center w-full h-fit bg-new2 pt-2">
-        <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 place-items-center"
-        >
-          <div
-            @click="openModal(), updateModalFaculty(faculty)"
-            class="flex justify-center items-center flex-col w-11/12 m-2 drop-shadow-2xl filter hover:grayscale hover:contrast-200 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
-            v-for="faculty in faculties"
-            :key="faculty.id"
-          >
-            <img
-              class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-lg"
-              :src="faculty.profile_pic"
-              :alt="faculty.name + '&nbsp;Photo'"
-            />
-            <div class="flex flex-col items-center justify-center mt-3 text-white">
-              <h3 class="text-2xl font-semibold mb-5">{{ faculty.name }}</h3>
-            </div>
+    <div class="flex flex-col items-center justify-center w-full h-fit mt-5">
+      <div class="vmb-5 text-left w-full md:w-2/3 p-2">
+        <div class="mt-4">
+          <p class="text-xl mb-4">Publications</p>
+        </div>
+      </div>
+      <div class="flex flex-col items-center justify-itemes-center md:w-2/3 w-full h-fit pt-2">
+        <div class="vmb-5 text-left w-full p-2">
+          <div class="mt-1">
+            <p class="text-xl mb-4">2023</p>
+          </div>
+        </div>
+        <div class="flex flex-row w-11/12 m-2 drop-shadow-2xl">
+          <div class="w-1/4">
+            <img class="h-32 w-32 object-cover" src="@/assets/images/home-bg.png" />
+          </div>
+          <div class="w-3/4 p-2">
+            <p>
+              Leveraging Programmable Dataplanes for a High Performance 5G User Plane Function,
+              Abhik Bose, Diptyaroop Maji, Prateek Agarwal, Nilesh Unhale, Rinku Shah, Mythili
+              Vutukuru in Asia-Pacific Workshop on Networking (APNet) on June, 2021 Hello World
+            </p>
+            <p class="font-bold hover:underline">[pdf]</p>
+          </div>
+        </div>
+
+        <div class="vmb-5 text-left w-full p-2">
+          <div class="mt-1">
+            <p class="text-xl mb-4">2022</p>
+          </div>
+        </div>
+        <div class="flex flex-row w-11/12 m-2 drop-shadow-2xl">
+          <div class="w-1/4">
+            <img class="h-32 w-32 object-cover" src="@/assets/images/home-bg.png" />
+          </div>
+          <div class="w-3/4 p-2">
+            <p>
+              Leveraging Programmable Dataplanes for a High Performance 5G User Plane Function,
+              Abhik Bose, Diptyaroop Maji, Prateek Agarwal, Nilesh Unhale, Rinku Shah, Mythili
+              Vutukuru in Asia-Pacific Workshop on Networking (APNet) on June, 2021 Hello World
+            </p>
+            <p class="font-bold hover:underline">[pdf]</p>
+          </div>
+        </div>
+        <div class="flex flex-row w-11/12 m-2 drop-shadow-2xl">
+          <div class="w-1/4">
+            <img class="h-32 w-32 object-cover" src="@/assets/images/home-bg.png" />
+          </div>
+          <div class="w-3/4 p-2">
+            <p>
+              Leveraging Programmable Dataplanes for a High Performance 5G User Plane Function,
+              Abhik Bose, Diptyaroop Maji, Prateek Agarwal, Nilesh Unhale, Rinku Shah, Mythili
+              Vutukuru in Asia-Pacific Workshop on Networking (APNet) on June, 2021 Hello World
+            </p>
+            <p class="font-bold hover:underline">[pdf]</p>
+          </div>
+        </div>
+        <div class="flex flex-row w-11/12 m-2 drop-shadow-2xl">
+          <div class="w-1/4">
+            <img class="h-32 w-32 object-cover" src="@/assets/images/home-bg.png" />
+          </div>
+          <div class="w-3/4 p-2">
+            <p>
+              Leveraging Programmable Dataplanes for a High Performance 5G User Plane Function,
+              Abhik Bose, Diptyaroop Maji, Prateek Agarwal, Nilesh Unhale, Rinku Shah, Mythili
+              Vutukuru in Asia-Pacific Workshop on Networking (APNet) on June, 2021 Hello World
+            </p>
+            <p class="font-bold hover:underline">[pdf]</p>
+          </div>
+        </div>
+
+        <div class="vmb-5 text-left w-full p-2">
+          <div class="mt-1">
+            <p class="text-xl mb-4">2021</p>
+          </div>
+        </div>
+        <div class="flex flex-row w-11/12 m-2 drop-shadow-2xl">
+          <div class="w-1/4">
+            <img class="h-32 w-32 object-cover" src="@/assets/images/home-bg.png" />
+          </div>
+          <div class="w-3/4 p-2">
+            <p>
+              Leveraging Programmable Dataplanes for a High Performance 5G User Plane Function,
+              Abhik Bose, Diptyaroop Maji, Prateek Agarwal, Nilesh Unhale, Rinku Shah, Mythili
+              Vutukuru in Asia-Pacific Workshop on Networking (APNet) on June, 2021 Hello World
+            </p>
+            <p class="font-bold hover:underline">[pdf]</p>
           </div>
         </div>
       </div>

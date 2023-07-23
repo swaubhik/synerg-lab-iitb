@@ -25,6 +25,10 @@ coverage
 *.ntvs*
 *.njsproj
 *.sln
+<<<<<<< HEAD
 *.sw?
 yarn.lock
 package-lock.json
+=======
+*.sw?
+>>>>>>> 59c8f94d0eca683d0e0e196b3b94d14f87bfb756
