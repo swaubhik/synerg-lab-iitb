@@ -17,8 +17,103 @@
       </div>
     </div>
     <div class="flex flex-col items-center justify-center w-full h-fit bg-new1">
-      <p v-html="about" class="mt-5 mb-5 text-left w-1/2 text-xl" md:class="mt-2 mb-5 text-center"></p>
+      <div class="mt-5 mb-5 md:text-left md:text-xl md:w-1/2 pl-2 md-full text-center">
+        <p v-html="about"></p>
+      </div>
     </div>
+    <div class="flex gap-x-28 gap-y-10 flex-col-reverse md:flex-row justify-between">
+      <div class="basis-1/2">
+        <div class="flex gap-x-28 gap-y-10 flex-col justify-between">
+          <div class="basis-1/2">
+            <p>
+              This area will basically serve as the point of sending most exciting news. Things that
+              we are currently working on.
+            </p>
+            <br />
+            <p>
+              And if we are looking for students or any companies to collaborate with. Everything
+              can be posted here.
+            </p>
+            <hr class="text-secondary w-full my-4" />
+            <p class="text-xs">Last Updated on 23 July, 2023</p>
+          </div>
+          <div class="basis-1/2">
+            <p>&copy; IIT Bombay, 2023</p>
+            <p>
+              Maintained by SynerG Web Admin. Special thanks to Swaubhik and Sameer for the
+              development of the website.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="basis-1/2">
+        <p class="text-xl mb-4">News</p>
+        <div class="flex flex-col items-center justify-center w-full h-fit bg-new2 pt-2">
+          <div
+            @click="openModal()"
+            class="flex flex-row items-center justify-center w-11/12 m-2 bg-secondary drop-shadow-2xl"
+          >
+            <div class="w-3/4 text-primary p-4">
+              <p class="font-bold text-xl hover:underline">Hola!!</p>
+              <p>Hello World</p>
+            </div>
+            <div class="w-1/4 text-primary">
+              <img class="h-32 object-cover" src="@/assets/images/home-bg.png" />
+            </div>
+          </div>
+          <div
+            @click="openModal()"
+            class="flex flex-row items-center justify-center w-11/12 m-2 bg-secondary drop-shadow-2xl"
+          >
+            <div class="w-3/4 text-primary p-4">
+              <p class="font-bold text-xl hover:underline">Rich Text</p>
+              <p>Rich Text is here yay!!</p>
+            </div>
+            <div class="w-1/4 text-primary">
+              <img class="h-32 object-cover" src="@/assets/images/home-bg.png" />
+            </div>
+          </div>
+          <router-link
+            :to="{ name: 'news' }"
+            class="flex flex-col items-center justify-center w-full mt-2 bg-new3"
+          >
+            <p class="text-xl p-1 text-primary">Show More</p>
+          </router-link>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <p class="text-xl mb-4">Principal Researchers</p>
+      <div class="flex flex-col items-center justify-center w-full h-fit bg-new2 pt-2">
+        <div
+          @click="openModal()"
+          class="flex flex-row items-center justify-center w-11/12 m-2 bg-secondary drop-shadow-2xl"
+        >
+          <div class="w-3/4 text-primary p-4">
+            <p class="font-bold text-xl hover:underline">Hola!!</p>
+            <p>Hello World</p>
+          </div>
+          <div class="w-1/4 text-primary">
+            <img class="h-32 object-cover" src="@/assets/images/home-bg.png" />
+          </div>
+        </div>
+        <div
+          @click="openModal()"
+          class="flex flex-row items-center justify-center w-11/12 m-2 bg-secondary drop-shadow-2xl"
+        >
+          <div class="w-3/4 text-primary p-4">
+            <p class="font-bold text-xl hover:underline">Rich Text</p>
+            <p>Rich Text is here yay!!</p>
+          </div>
+          <div class="w-1/4 text-primary">
+            <img class="h-32 object-cover" src="@/assets/images/home-bg.png" />
+          </div>
+        </div>
+        <div class="flex flex-col items-center justify-center w-full mt-2 bg-new3"></div>
+      </div>
+    </div>
+
+    <!-- Previous Design -->
     <div class="flex flex-col md:flex-row gap-10 w-full">
       <div class="flex flex-col md:w-3/4">
         <div class="font-semibold text-4xl">
