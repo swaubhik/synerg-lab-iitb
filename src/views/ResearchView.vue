@@ -14,11 +14,11 @@
         :key="research_area.id"
       >
         <div>
-          <h2  v-html="research_area.topic" class="text-xl prose mb-2 prose-invert"></h2>
+          <h2 v-html="research_area.topic" class="text-xl mb-2 prose prose-invert"></h2>
           <p class="prose prose-invert" v-html="research_area.details"></p>
         </div>
       </div>
-      <div class="vmb-5 text-left w-full md:w-2/3 p-2">
+      <div class="mb-5 text-left w-full md:w-2/3 p-2">
         <hr class="text-secondary w-full" />
         <p class="text-xs p-2">Last Updated on 23 July, 2023</p>
       </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="flex flex-col items-center justify-itemes-center md:w-2/3 w-full h-fit pt-2">
-        <div class="vmb-5 text-left w-full p-2">
+        <div class="mb-5 text-left w-full p-2">
           <div class="mt-1">
             <p class="text-xl mb-4">2023</p>
           </div>
