@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>People View</h1>
+    <h1>Research View</h1>
   </div>
 </template>
 

@@ -8,9 +8,7 @@
       :news_details="this.notice.content"
       @close="closeModal"
     />
-    <div
-      class="bg-no-repeat bg-center h-64 rounded-lg w-full bg-[url('@/assets/images/home-bg.png')]"
-    >
+    <div class="bg-no-repeat bg-center h-64 w-full bg-[url('@/assets/images/home-bg.png')]">
       <div
         class="flex flex-col items-center justify-center h-full bg-gradient-to-b from-primary/80 via-neutral/20 to-transparent px-2"
       >
@@ -18,7 +16,16 @@
         <h2 class="text-2xl">{{ siteMetaData.description }}</h2>
       </div>
     </div>
-    <div class="flex flex-col md:flex-row-reverse gap-10 w-full">
+    <div class="flex flex-col items-center justify-center w-full h-fit bg-new1">
+      <p v-html="about" class="mt-5 mb-5 text-left w-1/2 text-xl" md:class="mt-2 mb-5 text-center"></p>
+    </div>
+    <div class="flex flex-col md:flex-row gap-10 w-full">
+      <div class="flex flex-col md:w-3/4">
+        <div class="font-semibold text-4xl">
+          <h2>About <span class="text-accent">us</span></h2>
+        </div>
+        <p v-html="about" class="mt-2 text-left"></p>
+      </div>
       <div
         class="border border-accent h-96 rounded-lg flex flex-col md:w-1/4 items-center overflow-y-auto"
       >
@@ -33,26 +40,20 @@
               v-for="(news, index) in notices"
               :key="index"
             >
-              <div class="flex justify-end" v-if="index === 0">
+              <!-- <div class="flex justify-end" v-if="index === 0">
                 <span class="relative flex h-3 w-3">
                   <span
                     class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"
                   ></span>
                   <span class="relative inline-flex rounded-full h-3 w-3 bg-error"></span>
                 </span>
-              </div>
+              </div> -->
               <h4 class="font-bold">{{ formateDate(news.created) }}</h4>
               <h5 class="font-semibold">{{ news.title }}</h5>
               <p class="font-medium">{{ news.short_description }}</p>
             </li>
           </ul>
         </div>
-      </div>
-      <div class="flex flex-col md:w-3/4">
-        <div class="font-semibold text-4xl">
-          <h2>About <span class="text-accent">us</span></h2>
-        </div>
-        <p v-html="about" class="mt-2 text-justify"></p>
       </div>
     </div>
   </section>

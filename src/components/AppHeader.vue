@@ -2,28 +2,41 @@
   <header class="p-4 md:p-8 flex justify-between items-center">
     <router-link :to="{ name: 'home' }">
       <h1 class="sr-only">{{ siteMeataData.title }}</h1>
-      <img class="w-10 h-10" src="@/assets/logo.svg" alt="logo" />
+      <img class="h-12" src="@/assets/synerg-logo.png" alt="logo" />
     </router-link>
     <div class="hidden sm:block">
       <nav class="uppercase font-medium">
         <ul class="flex justify-between gap-8">
-          <li>
-            <router-link exact-active-class="font-bold text-accent" :to="{ name: 'people' }"
-              >People</router-link
-            >
-          </li>
           <li>
             <router-link exact-active-class="font-bold text-accent" :to="{ name: 'research' }"
               >Research</router-link
             >
           </li>
           <li>
-            <router-link exact-active-class="font-bold text-accent" :to="{ name: 'contact-us' }"
-              >Contact Us</router-link
+            <router-link exact-active-class="font-bold text-accent" :to="{ name: 'people' }"
+              >People</router-link
+            >
+          </li>
+          <li>
+            <router-link exact-active-class="font-bold text-accent" :to="{ name: 'news' }"
+              >News</router-link
+            >
+          </li>
+          <li>
+            <router-link exact-active-class="font-bold text-accent" :to="{ name: 'resources' }"
+              >Resources</router-link
+            >
+          </li>
+          <li>
+            <router-link exact-active-class="font-bold text-accent" :to="{ name: 'about' }"
+              >About</router-link
             >
           </li>
         </ul>
       </nav>
+    </div>
+    <div class="hidden sm:block">
+      <img class="h-12" src="@/assets/iitb-logo.png" alt="logo" />
     </div>
     <!-- mobile nav -->
     <div class="sm:hidden z-50">
@@ -74,14 +87,6 @@
             <li>
               <router-link
                 exact-active-class="font-bold text-accent"
-                :to="{ name: 'people' }"
-                @click="toggleMenu"
-                >People</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                exact-active-class="font-bold text-accent"
                 :to="{ name: 'research' }"
                 @click="toggleMenu"
                 >Research</router-link
@@ -90,9 +95,33 @@
             <li>
               <router-link
                 exact-active-class="font-bold text-accent"
-                :to="{ name: 'contact-us' }"
+                :to="{ name: 'people' }"
                 @click="toggleMenu"
-                >Contact Us</router-link
+                >People</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                exact-active-class="font-bold text-accent"
+                :to="{ name: 'news' }"
+                @click="toggleMenu"
+                >News</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                exact-active-class="font-bold text-accent"
+                :to="{ name: 'resources' }"
+                @click="toggleMenu"
+                >Resources</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                exact-active-class="font-bold text-accent"
+                :to="{ name: 'about' }"
+                @click="toggleMenu"
+                >About</router-link
               >
             </li>
           </ul>
