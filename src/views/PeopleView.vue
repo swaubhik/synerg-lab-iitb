@@ -144,6 +144,8 @@
 
 <script>
 import axios from 'axios'
+import { mapImagePath } from '../helpers'
+
 export default {
   data() {
     return {
@@ -164,20 +166,10 @@ export default {
         this.faculties = response.data.items.filter((item) => item.user_type === 'faculty')
         this.students = response.data.items.filter((item) => item.user_type === 'student')
         this.faculties.forEach((faculty) => {
-          faculty.profile_pic = faculty.profile_pic.replace(
-            faculty.profile_pic,
-            import.meta.env.VITE_BACKEND_URL +
-              `api/files/users/${faculty.id}/` +
-              faculty.profile_pic
-          )
+          faculty.profile_pic =  mapImagePath(faculty.id , 'users' , faculty.profile_pic);
         })
         this.students.forEach((student) => {
-          student.profile_pic = student.profile_pic.replace(
-            student.profile_pic,
-            import.meta.env.VITE_BACKEND_URL +
-              `api/files/users/${student.id}/` +
-              student.profile_pic
-          )
+          student.profile_pic =  mapImagePath(student.id , 'users' , student.profile_pic);
         })
         this.selectedStudents = this.PHDstudents
       })

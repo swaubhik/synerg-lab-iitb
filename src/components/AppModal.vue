@@ -21,7 +21,7 @@
       </button>
       <div class="p-10 mt-5 mb-5 md:text-left md:w-1/2 md-full overflow-auto">
         <h2 class="text-2xl font-bold">{{ title }}</h2>
-        <span v-if="ifNews" class="leading-6 flex">{{ formateDate(publishedDate) }}</span>
+        <span v-if="!!publishedDate" class="leading-6 flex">{{ formateDate(publishedDate) }}</span>
         <hr class="my-2" />
         <div class="">
           <article v-html="news_details" class=""></article>
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { formattedDate } from '../helpers'
 export default {
   props: {
     title: {
@@ -41,8 +42,7 @@ export default {
     },
     publishedDate: {
       type: String,
-      required: true,
-      default: '07-07-2023'
+      required: false,
     },
     news_details: {
       type: String,
@@ -53,19 +53,10 @@ export default {
       type: Boolean,
       required: true,
       default: true
-    },
-    ifNews: {
-      type: Boolean,
-      required: true,
-      default: true
     }
   },
   methods: {
-    formateDate(date) {
-      const newdate = new Date(date)
-      console.log(newdate)
-      return newdate.toDateString()
-    }
+    formateDate: (date)  => formattedDate(date)
   }
 }
 </script>

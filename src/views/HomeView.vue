@@ -4,9 +4,8 @@
       v-if="showModal"
       :isOpen="showModal"
       :title="this.notice.title"
-      :publishedDate="this.notice.created"
+      :publishedDate="this.notice.date"
       :news_details="this.notice.content"
-      :ifNews="this.notice.news"
       @close="closeModal"
     />
     <div class="bg-no-repeat bg-center h-64 w-full bg-[url('@/assets/images/home-bg.png')]">
@@ -26,33 +25,16 @@
       <div class="basis-1/2">
         <div class="flex gap-x-28 gap-y-10 flex-col justify-between">
           <div class="basis-1/2">
-            <p>
-              This area will basically serve as the point of sending most exciting news. Things that
-              we are currently working on.
-            </p>
-            <br />
-            <p>
-              And if we are looking for students or any companies to collaborate with. Everything
-              can be posted here.
-            </p>
+            <p v-html="update"></p>
             <hr class="text-secondary w-full my-4" />
-            <p class="text-xs">Last Updated on 23 July, 2023</p>
+            <p class="text-xs">Last Updated on {{ updateDate }}</p>
           </div>
           <div class="basis-1/2">
             <p class="text-xl mb-4">Research</p>
             <div class="flex flex-row flex-wrap">
-              <p class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline">
-                Software Defined Network
-              </p>
-              <p class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline">
-                Virtualization
-              </p>
-              <p class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline">
-                Wireless Networks
-              </p>
-              <p class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline">
-                Operating Sysytems
-              </p>
+              <a v-for="topic in displayTopics" class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline" href="#">
+                {{ topic.topic }}
+              </a>
             </div>
             <router-link :to="{ name: 'research' }" class="mt-4">
               <p class="text-sm p-1 mt-3 hover:underline">Show More</p>
@@ -63,7 +45,22 @@
       <div class="basis-1/2">
         <p class="text-xl mb-4">News</p>
         <div class="flex flex-col items-center justify-center w-full h-fit bg-new2 pt-2">
+          
           <div
+            v-for="news in newsList"
+            @click="openModal(), updateModalNews(news)"
+            class="flex flex-row items-center justify-center w-11/12 m-2 bg-secondary drop-shadow-2xl"
+          >
+            <div class="w-3/4 text-primary p-4">
+              <p class="font-bold text-xl hover:underline">{{ news.title }}</p>
+              <p>{{ news.short_description }}</p>
+            </div>
+            <div class="w-1/4 text-primary">
+              <img class="h-32 object-cover" :src="news.thumbnail_url" />
+            </div>
+          </div>
+          
+          <!-- <div
             @click="openModal()"
             class="flex flex-row items-center justify-center w-11/12 m-2 bg-secondary drop-shadow-2xl"
           >
@@ -86,7 +83,7 @@
             <div class="w-1/4 text-primary">
               <img class="h-32 object-cover" src="@/assets/images/home-bg.png" />
             </div>
-          </div>
+          </div> -->
           <router-link
             :to="{ name: 'news' }"
             class="flex flex-col items-center justify-center w-full mt-2 bg-new3"
@@ -157,15 +154,17 @@
             </li>
           </ul>
         </div>
-      </div>
-    </div> -->
+      </div> 
+    </div>-->
   </section>
 </template>
 
 <script>
 import siteMetaData from '@/data/siteMetaData.js'
-import axios from 'axios'
+import axios, { formToJSON } from 'axios'
 import AppModal from '../components/AppModal.vue'
+import { mapImagePath, formattedDate } from '../helpers'
+
 export default {
   components: { AppModal },
   name: 'HomeView',
@@ -174,26 +173,52 @@ export default {
       faculties: [],
       siteMetaData,
       about: '',
-      notices: '',
+      update: '',
+      updateDate: '',
+      displayTopics: {
+        id: String,
+        topic: String
+      },
+      newsList: [],
       showModal: false,
-      notice: {
+      
+      modalContent: {
         title: String,
         date: String,
-        content: String
+        content: String,
       }
     }
   },
   async created() {
     await axios
-      .get('/api/collections/about/records', {
+      .get('/api/collections/about/records/000000000000001', {
         headers: {
           'Content-Type': 'application/json'
         }
       })
       .then((response) => {
-        this.about = response.data.items[0].details
+        this.about = response.data.details;
       }),
-      await axios
+    await axios
+      .get('/api/collections/about/records/000000000000002', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => {
+        this.update = response.data.details;
+        this.updateDate = formattedDate(response.data.updated);
+      }),
+    await axios
+      .get('/api/collections/research/records?sort=@random&perPage=4', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => {
+        this.displayTopics = response.data.items;
+      }),
+    await axios
         .get('/api/collections/users/records', {
           headers: {
             'Content-Type': 'application/json'
@@ -202,34 +227,23 @@ export default {
         .then((response) => {
           this.faculties = response.data.items.filter((item) => item.user_type === 'faculty')
           this.faculties.forEach((faculty) => {
-            faculty.profile_pic = faculty.profile_pic.replace(
-              faculty.profile_pic,
-              import.meta.env.VITE_BACKEND_URL +
-                `api/files/users/${faculty.id}/` +
-                faculty.profile_pic
-            )
+            faculty.profile_pic = mapImagePath(faculty.id , 'users' , faculty.profile_pic) ;
           })
         })
-  },
-  async mounted() {
     await axios
-      .get('/api/collections/news/records', {
-        params: {
-          sort: '-created'
-        },
+      .get('/api/collections/news/records?sort=-updated&perPage=2', {
         headers: {
           'Content-Type': 'application/json'
         }
       })
       .then((response) => {
-        this.notices = response.data.items
+        this.newsList = response.data.items
+        this.newsList.forEach((news) => {
+          news.thumbnail_url = mapImagePath(news.id , 'news' , news.thumbnail) ;
+        });
       })
   },
   methods: {
-    formateDate(date) {
-      const newdate = new Date(date)
-      return newdate.toDateString()
-    },
     openModal() {
       this.showModal = true
     },
@@ -239,17 +253,15 @@ export default {
     updateModalNews(news) {
       this.notice = {
         title: news.title,
-        date: news.created,
-        content: news.news_details,
-        news: true
+        date: news.updated,
+        content: news.news_details
       }
     },
     updateModalFaculty(faculty) {
       this.notice = {
         title: faculty.name,
-        date: faculty.updated,
-        content: faculty.faculty_notes,
-        news: false
+        date: undefined,
+        content: faculty.faculty_notes
       }
     }
   }
