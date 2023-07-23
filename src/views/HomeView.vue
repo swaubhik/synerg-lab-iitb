@@ -38,11 +38,24 @@
             <p class="text-xs">Last Updated on 23 July, 2023</p>
           </div>
           <div class="basis-1/2">
-            <p>&copy; IIT Bombay, 2023</p>
-            <p>
-              Maintained by SynerG Web Admin. Special thanks to Swaubhik and Sameer for the
-              development of the website.
-            </p>
+            <p class="text-xl mb-4">Research</p>
+            <div class="flex flex-row flex-wrap">
+              <p class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline">
+                Software Defined Network
+              </p>
+              <p class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline">
+                Virtualization
+              </p>
+              <p class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline">
+                Wireless Networks
+              </p>
+              <p class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline">
+                Operating Sysytems
+              </p>
+            </div>
+            <router-link :to="{ name: 'research' }" class="mt-4">
+              <p class="text-sm p-1 mt-3 hover:underline">Show More</p>
+            </router-link>
           </div>
         </div>
       </div>
@@ -77,7 +90,7 @@
             :to="{ name: 'news' }"
             class="flex flex-col items-center justify-center w-full mt-2 bg-new3"
           >
-            <p class="text-xl p-1 text-primary">Show More</p>
+            <p class="text-xl p-1 text-primary hover:underline">Show More</p>
           </router-link>
         </div>
       </div>
@@ -86,35 +99,29 @@
       <p class="text-xl mb-4">Principal Researchers</p>
       <div class="flex flex-col items-center justify-center w-full h-fit bg-new2 pt-2">
         <div
-          @click="openModal()"
-          class="flex flex-row items-center justify-center w-11/12 m-2 bg-secondary drop-shadow-2xl"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 place-items-center"
         >
-          <div class="w-3/4 text-primary p-4">
-            <p class="font-bold text-xl hover:underline">Hola!!</p>
-            <p>Hello World</p>
-          </div>
-          <div class="w-1/4 text-primary">
-            <img class="h-32 object-cover" src="@/assets/images/home-bg.png" />
+          <div
+            @click="openModal()"
+            class="flex justify-center items-center flex-col w-11/12 m-2 drop-shadow-2xl filter hover:grayscale hover:contrast-200 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+            v-for="faculty in faculties"
+            :key="faculty.id"
+          >
+            <img
+              class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-lg"
+              :src="faculty.profile_pic"
+              :alt="faculty.name + '&nbsp;Photo'"
+            />
+            <div class="flex flex-col items-center justify-center mt-3 text-white">
+              <h3 class="text-2xl font-semibold mb-5">{{ faculty.name }}</h3>
+            </div>
           </div>
         </div>
-        <div
-          @click="openModal()"
-          class="flex flex-row items-center justify-center w-11/12 m-2 bg-secondary drop-shadow-2xl"
-        >
-          <div class="w-3/4 text-primary p-4">
-            <p class="font-bold text-xl hover:underline">Rich Text</p>
-            <p>Rich Text is here yay!!</p>
-          </div>
-          <div class="w-1/4 text-primary">
-            <img class="h-32 object-cover" src="@/assets/images/home-bg.png" />
-          </div>
-        </div>
-        <div class="flex flex-col items-center justify-center w-full mt-2 bg-new3"></div>
       </div>
     </div>
 
     <!-- Previous Design -->
-    <div class="flex flex-col md:flex-row gap-10 w-full">
+    <!-- <div class="flex flex-col md:flex-row gap-10 w-full">
       <div class="flex flex-col md:w-3/4">
         <div class="font-semibold text-4xl">
           <h2>About <span class="text-accent">us</span></h2>
@@ -134,8 +141,8 @@
               class="bg-accent rounded-lg py-2 px-4 text-left"
               v-for="(news, index) in notices"
               :key="index"
-            >
-              <!-- <div class="flex justify-end" v-if="index === 0">
+            > -->
+    <!-- <div class="flex justify-end" v-if="index === 0">
                 <span class="relative flex h-3 w-3">
                   <span
                     class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"
@@ -143,14 +150,14 @@
                   <span class="relative inline-flex rounded-full h-3 w-3 bg-error"></span>
                 </span>
               </div> -->
-              <h4 class="font-bold">{{ formateDate(news.created) }}</h4>
+    <!-- <h4 class="font-bold">{{ formateDate(news.created) }}</h4>
               <h5 class="font-semibold">{{ news.title }}</h5>
               <p class="font-medium">{{ news.short_description }}</p>
             </li>
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 </template>
 
@@ -163,6 +170,7 @@ export default {
   name: 'HomeView',
   data() {
     return {
+      faculties: [],
       siteMetaData,
       about: '',
       notices: '',
@@ -183,7 +191,24 @@ export default {
       })
       .then((response) => {
         this.about = response.data.items[0].details
-      })
+      }),
+      await axios
+        .get('/api/collections/users/records', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {
+          this.faculties = response.data.items.filter((item) => item.user_type === 'faculty')
+          this.faculties.forEach((faculty) => {
+            faculty.profile_pic = faculty.profile_pic.replace(
+              faculty.profile_pic,
+              import.meta.env.VITE_BACKEND_URL +
+                `api/files/users/${faculty.id}/` +
+                faculty.profile_pic
+            )
+          })
+        })
   },
   async mounted() {
     await axios
