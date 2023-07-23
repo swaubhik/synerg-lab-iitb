@@ -32,7 +32,12 @@
           <div class="basis-1/2">
             <p class="text-xl mb-4">Research</p>
             <div class="flex flex-row flex-wrap">
-              <a v-for="topic in displayTopics" class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline" href="#">
+              <a
+                v-for="topic in displayTopics"
+                :key="topic.id"
+                class="bg-secondary text-primary p-1 m-1 font-bold w-fit hover:underline"
+                href="#"
+              >
                 {{ topic.topic }}
               </a>
             </div>
@@ -45,9 +50,9 @@
       <div class="basis-1/2">
         <p class="text-xl mb-4">News</p>
         <div class="flex flex-col items-center justify-center w-full h-fit bg-new2 pt-2">
-          
           <div
             v-for="news in newsList"
+            :key="news.id"
             @click="openModal(), updateModalNews(news)"
             class="flex flex-row items-center justify-center w-11/12 m-2 bg-secondary drop-shadow-2xl"
           >
@@ -59,7 +64,7 @@
               <img class="h-32 object-cover" :src="news.thumbnail_url" />
             </div>
           </div>
-          
+
           <!-- <div
             @click="openModal()"
             class="flex flex-row items-center justify-center w-11/12 m-2 bg-secondary drop-shadow-2xl"
@@ -181,11 +186,11 @@ export default {
       },
       newsList: [],
       showModal: false,
-      
+
       modalContent: {
         title: String,
         date: String,
-        content: String,
+        content: String
       }
     }
   },
@@ -197,28 +202,28 @@ export default {
         }
       })
       .then((response) => {
-        this.about = response.data.details;
+        this.about = response.data.details
       }),
-    await axios
-      .get('/api/collections/about/records/000000000000002', {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then((response) => {
-        this.update = response.data.details;
-        this.updateDate = formattedDate(response.data.updated);
-      }),
-    await axios
-      .get('/api/collections/research/records?sort=@random&perPage=4', {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then((response) => {
-        this.displayTopics = response.data.items;
-      }),
-    await axios
+      await axios
+        .get('/api/collections/about/records/000000000000002', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {
+          this.update = response.data.details
+          this.updateDate = formattedDate(response.data.updated)
+        }),
+      await axios
+        .get('/api/collections/research/records?sort=@random&perPage=4', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {
+          this.displayTopics = response.data.items
+        }),
+      await axios
         .get('/api/collections/users/records', {
           headers: {
             'Content-Type': 'application/json'
@@ -227,7 +232,7 @@ export default {
         .then((response) => {
           this.faculties = response.data.items.filter((item) => item.user_type === 'faculty')
           this.faculties.forEach((faculty) => {
-            faculty.profile_pic = mapImagePath(faculty.id , 'users' , faculty.profile_pic) ;
+            faculty.profile_pic = mapImagePath(faculty.id, 'users', faculty.profile_pic)
           })
         })
     await axios
@@ -239,8 +244,8 @@ export default {
       .then((response) => {
         this.newsList = response.data.items
         this.newsList.forEach((news) => {
-          news.thumbnail_url = mapImagePath(news.id , 'news' , news.thumbnail) ;
-        });
+          news.thumbnail_url = mapImagePath(news.id, 'news', news.thumbnail)
+        })
       })
   },
   methods: {
