@@ -119,10 +119,8 @@
 <script>
 import siteMetaData from '@/data/siteMetaData.js'
 import axios from 'axios'
-import AppModal from '../components/AppModal.vue'
 export default {
-  components: { AppModal },
-  name: 'HomeView',
+  name: 'ResearchView',
   data() {
     return {
       siteMetaData,

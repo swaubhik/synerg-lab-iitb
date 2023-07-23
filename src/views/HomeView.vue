@@ -186,7 +186,6 @@ export default {
       },
       newsList: [],
       showModal: false,
-
       modalContent: {
         title: String,
         date: String,
