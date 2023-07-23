@@ -6,6 +6,7 @@
       :title="this.notice.title"
       :publishedDate="this.notice.created"
       :news_details="this.notice.content"
+      :ifNews="this.notice.news"
       @close="closeModal"
     />
     <div class="bg-no-repeat bg-center h-64 w-full bg-[url('@/assets/images/home-bg.png')]">
@@ -17,7 +18,7 @@
       </div>
     </div>
     <div class="flex flex-col items-center justify-center w-full h-fit bg-new1">
-      <div class="mt-5 mb-5 md:text-left md:text-xl md:w-1/2 pl-2 md-full text-center">
+      <div class="mt-5 mb-5 md:text-left md:text-xl md:w-1/2 p-2 md-full text-center">
         <p v-html="about"></p>
       </div>
     </div>
@@ -102,7 +103,7 @@
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 place-items-center"
         >
           <div
-            @click="openModal()"
+            @click="openModal(), updateModalFaculty(faculty)"
             class="flex justify-center items-center flex-col w-11/12 m-2 drop-shadow-2xl filter hover:grayscale hover:contrast-200 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
             v-for="faculty in faculties"
             :key="faculty.id"
@@ -235,11 +236,20 @@ export default {
     closeModal() {
       this.showModal = false
     },
-    updateModal(news) {
+    updateModalNews(news) {
       this.notice = {
         title: news.title,
         date: news.created,
-        content: news.news_details
+        content: news.news_details,
+        news: true
+      }
+    },
+    updateModalFaculty(faculty) {
+      this.notice = {
+        title: faculty.name,
+        date: faculty.updated,
+        content: faculty.faculty_notes,
+        news: false
       }
     }
   }

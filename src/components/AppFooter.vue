@@ -17,15 +17,15 @@
       </div>
       <div class="basis-1/3 text-center md:text-left">
         <p class="text-xl text-accent py-1">Useful Links</p>
-        <a :href="siteMetaData.socials.iitb" target="_blank" rel="noopener noreferrer"
+        <a :href="siteMetaData.socials.iitb" target="_blank" rel="noopener noreferrer" class="hover:underline"
           >IIT Bombay</a
         >
         <br />
-        <a :href="siteMetaData.socials.cseiitb" target="_blank" rel="noopener noreferrer"
+        <a :href="siteMetaData.socials.cseiitb" target="_blank" rel="noopener noreferrer" class="hover:underline"
           >CSE Department</a
         >
         <p class="text-xl text-accent py-1">Internal Links</p>
-        <a :href="siteMetaData.socials.adminlogin" target="_blank" rel="noopener noreferrer"
+        <a :href="siteMetaData.socials.adminlogin" target="_blank" rel="noopener noreferrer" class="hover:underline"
           >Admin Login</a
         >
       </div>
