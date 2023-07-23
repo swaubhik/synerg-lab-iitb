@@ -7,7 +7,7 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 
-const backend = import.meta.env.VITE_BACKEND_URL
+const backend = 'http://synerg.centralindia.cloudapp.azure.com'
 
 axios.defaults.baseURL = backend
 const app = createApp(App)
