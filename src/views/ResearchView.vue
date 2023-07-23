@@ -13,8 +13,10 @@
         v-for="research_area in research_areas"
         :key="research_area.id"
       >
-        <h2 v-html="research_area.topic" class="text-xl mb-2"></h2>
-        <p v-html="research_area.details"></p>
+        <div>
+          <h2  v-html="research_area.topic" class="text-xl prose mb-2 prose-invert"></h2>
+          <p class="prose prose-invert" v-html="research_area.details"></p>
+        </div>
       </div>
       <div class="vmb-5 text-left w-full md:w-2/3 p-2">
         <hr class="text-secondary w-full" />
