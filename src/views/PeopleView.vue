@@ -20,13 +20,13 @@
           :key="faculty.id"
         >
           <img
-            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-lg"
+            class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-lg"
             :src="faculty.profile_pic"
             :alt="faculty.name + '&nbsp;Photo'"
           />
           <div class="flex flex-col items-center justify-center mt-3 text-white">
             <h3 class="text-2xl font-semibold mb-5">{{ faculty.name }}</h3>
-            <p class="text-sm font-medium">{{ faculty.research_area }}</p>
+            <p class="text-sm font-medium text-center">{{ faculty.research_area }}</p>
             <div class="flex gap-4 mt-6 text-accent">
               <a :href="`mailto:${faculty.email}`">
                 <svg
@@ -94,7 +94,7 @@
           B. Tech
         </button>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 place-items-center">
         <div class="" v-for="student in selectedStudents" :key="student.id">
           <img
             class="w-64 h-64 md:w-80 md:h-80 object-cover object-center rounded-lg"
